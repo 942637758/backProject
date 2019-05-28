@@ -1,0 +1,80 @@
+spring:
+  application:
+    name: service-hi
+    id: "4a4ededccf3e47d1bfb84c13d0707612"
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.168:3306/dygport?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: dygport
+    password: dygport
+
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  zipkin:
+    enabled: true
+    base-url: http://cloud-dashboard-zipkin/
+  sleuth:
+    sampler:
+      probability: 1
+server:
+  port: 8800
+logging:
+#  pattern:
+#    console: "%d  -  %msg%n"
+  #file: D:\tmp\ticketseller.log
+  level:
+    org.bachelor.architecture.eureka : debug
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://10.30.13.114:8740/eureka
+      defaultZone: http://localhost:8740/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    health-check-url-path: /actuator/health
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 2
+    metadata-map:
+      api-url: swagger-ui.html
+
+feign:
+  hystrix:
+    enabled: true
+info:
+  app:
+    name: 'service-hi应用管理'
+    version: '@project.version@'
+swagger:
+  base-package: "org.bachelor.architecture.eureka.controller"
+  title: "Bachelor-ms-eureka-client 工程的Restful API"
+  version: "1.0"
+  description: "嵌入Swagger API 描述"
+bachelor:
+  auth:
+    excludePathPatterns: "/**/*"
+management:
+  server:
+    port: 9601
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always

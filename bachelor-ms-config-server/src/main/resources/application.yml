@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: config-service
+
+server:
+  port: 8088
+eureka:
+  client:
+    service-url:
+       defaultZone: http://localhost:8740/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    health-check-url-path: /actuator/health
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 2
+
+access_token_url: http://172.30.4.24:8080/user-asserver/accessToken
+api_url: http://172.30.4.24:8080/user
+authorize_url: http://172.30.4.24:8080/user-asserver/appskinoversea/authorize
+client_id: 4a4ededccf3e47d1bfb84c13d0707612
+client_secret: 63bead0aecd94d74a7be1e95162714ba
+login.logoutRedirectURL: http://localhost:4200
+logout_url: http://172.30.4.24:8080/user-asserver/logout
+mtorg_url: http://172.30.4.24:8080/user/api/mtUserOrgs
+redirect_url: http://localhost:8080/snshub/
+user_info_url: http://172.30.4.24:8080/user-asserver/userInfo
+user_role_url: http://172.30.4.24:8080/user/api/userRoles
+org_info_url: http://172.30.4.24:8080/user/api/orgs
+user_info_detail: http://172.30.4.24:8080/user/api/userInfoDetail

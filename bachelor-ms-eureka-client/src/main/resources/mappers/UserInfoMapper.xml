@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bachelor.architecture.eureka.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="org.bachelor.architecture.eureka.domain.UserInfo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="user_type" jdbcType="VARCHAR" property="userType"/>
+        <result column="enabled" jdbcType="INTEGER" property="enabled"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+    </resultMap>
+
+    <resultMap id="userInfoVOResultMap" type="org.bachelor.architecture.eureka.vo.UserInfoVO">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="user_type" jdbcType="VARCHAR" property="userType" />
+        <result column="enabled" jdbcType="INTEGER" property="enabled" />
+        <result column="real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="qq" jdbcType="VARCHAR" property="qq" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
+    </resultMap>
+    <sql id="UserInfoVO_Column_List">
+        id, user_name, user_type, enabled, real_name, qq, email, address, tel
+    </sql>
+
+    <select id="selectAllUserInfoVO" resultMap="userInfoVOResultMap">
+        SELECT <include refid="UserInfoVO_Column_List" /> FROM user_info u
+    </select>
+</mapper>

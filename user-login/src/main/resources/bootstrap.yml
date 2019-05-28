@@ -1,0 +1,80 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: user-login
+  cloud:
+    config:
+      name: user-login
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        service-id: config-service
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  zipkin:
+    enabled: true
+    base-url: http://cloud-dashboard-zipkin/
+  sleuth:
+    sampler:
+      probability: 1
+  redis:
+    host: 172.30.4.24
+    port: 6379
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        max-wait: 1000ms
+        min-idle: 5
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8740/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    health-check-url-path: /actuator/health
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 2
+    metadata-map:
+      api-url: swagger-ui.html
+feign:
+  hystrix:
+    enabled: true
+info:
+  app:
+    name: "@project.name@"
+    version: "@project.version@"
+swagger:
+  base-package: "org.bachelor.userlogin.controller"
+  title: "UserLogin 工程的Restful API"
+  version: "1.0"
+  description: "嵌入Swagger API 描述"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+access_token_url: http://172.30.4.24:8080/user-asserver/accessToken
+api_url: http://172.30.4.24:8080/user
+authorize_url: http://172.30.4.24:8080/user-asserver/appskinoversea/authorize
+client_id: 4a4ededccf3e47d1bfb84c13d0707612
+client_secret: 63bead0aecd94d74a7be1e95162714ba
+login.logoutRedirectURL: http://localhost:4200
+logout_url: http://172.30.4.24:8080/user-asserver/logout
+mtorg_url: http://172.30.4.24:8080/user/api/mtUserOrgs
+redirect_url: http://localhost:8080/snshub/
+user_info_url: http://172.30.4.24:8080/user-asserver/userInfo
+user_role_url: http://172.30.4.24:8080/user/api/userRoles
+org_info_url: http://172.30.4.24:8080/user/api/orgs
+user_info_detail: http://172.30.4.24:8080/user/api/userInfoDetail
